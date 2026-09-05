@@ -3,374 +3,813 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="title" content="Happy Birthday Website | Hayati">
-  <meta name="author" content="Hayati">
-  <meta name="github" content="https://github.com/saklincodes/birthday-celebration">
-  <title>Birthday Gift Animation | Hayati</title>
+  <meta name="description" content="A cinematic romantic love story experience — beautiful, interactive, and unforgettable.">
+  <title>Whispers of Love 💕</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
 
-  <!-- ❤️ Floating Heart Cursor Script (restored and working) -->
-  <script type="text/javascript">
-  var colours = ['#ff3366', '#ff6699', '#ff33cc', '#ff99cc', '#ff66b2', '#ff0066']; 
-  var minisize = 16; 
-  var maxisize = 28; 
-  var hearts = 66; 
-  var over_or_under = "over"; 
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
 
-  var x = ox = 400;
-  var y = oy = 300;
-  var swide = 800;
-  var shigh = 600;
-  var sleft = sdown = 0;
-  var herz = [];
-  var herzx = [];
-  var herzy = [];
-  var herzs = [];
-  var kiss = false;
+  <!-- Scroll Navigation Dots -->
+  <nav class="scroll-indicator" id="scrollNav" aria-label="Scene navigation">
+    <div class="scroll-dot active" data-scene="0" title="Opening"></div>
+    <div class="scroll-dot" data-scene="1" title="Starry Night"></div>
+    <div class="scroll-dot" data-scene="2" title="Garden of Love"></div>
+    <div class="scroll-dot" data-scene="3" title="Love Letter"></div>
+    <div class="scroll-dot" data-scene="4" title="Memories"></div>
+    <div class="scroll-dot" data-scene="5" title="Finale"></div>
+  </nav>
 
-  if (typeof('addRVLoadEvent') != 'function') function addRVLoadEvent(funky) {
-    var oldonload = window.onload;
-    if (typeof(oldonload) != 'function') window.onload = funky;
-    else window.onload = function() {
-      if (oldonload) oldonload();
-      funky();
-    }
+  <!-- =============================================
+       SCENE 1 — THE OPENING
+       ============================================= -->
+  <section class="scene scene-1" id="scene-1">
+    <!-- Big heart watermark -->
+    <div class="big-heart-bg" aria-hidden="true">♡</div>
+
+    <!-- Falling Petals -->
+    <div class="petals-container" id="petalsContainer" aria-hidden="true"></div>
+
+    <div class="scene-1-content">
+      <p class="opening-tagline reveal">A Love Story</p>
+      <h1 class="opening-title reveal reveal-delay-1">Whispers<br>of Love</h1>
+      <div class="typewriter-wrap">
+        <p class="typewriter-text reveal reveal-delay-2">
+          <span id="typedText"></span><span class="typed-cursor">|</span>
+        </p>
+      </div>
+      <div class="scroll-hint reveal reveal-delay-3">
+        <p>Scroll to begin the journey</p>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SCENE 2 — STARRY NIGHT
+       ============================================= -->
+  <section class="scene scene-2" id="scene-2">
+    <div class="stars-container" id="starsContainer" aria-hidden="true"></div>
+    <div class="moon" aria-hidden="true"></div>
+    <div class="floating-sparkles" id="sparklesContainer" aria-hidden="true"></div>
+
+    <div class="scene-2-content">
+      <blockquote class="quote reveal">"In the quiet of the night,<br>I found you."</blockquote>
+      <p class="sub-quote reveal reveal-delay-2">You became my favorite chapter.</p>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SCENE 3 — GARDEN OF LOVE
+       ============================================= -->
+  <section class="scene scene-3" id="scene-3">
+    <!-- Background ripple overlay -->
+    <div class="scene3-ripple" id="scene3Ripple" aria-hidden="true"></div>
+    <!-- Background floating particles container -->
+    <div class="scene3-bg-particles" id="scene3BgParticles" aria-hidden="true"></div>
+
+    <div class="scene-3-content">
+      <p class="section-label reveal">Our Garden</p>
+      <h2 class="section-title reveal reveal-delay-1">Garden of Love</h2>
+      <div class="quote-card reveal reveal-delay-2" id="quoteCard">
+        <div class="quote-inner">
+          <span class="quote-mark">"</span>
+          <p id="loveQuote"></p>
+          <span class="quote-mark close-quote">"</span>
+        </div>
+        <div class="quote-counter" id="quoteCounter">1 / 8</div>
+      </div>
+      <div id="petalEmitter" class="petal-emitter" aria-hidden="true"></div>
+      <button class="btn-rose reveal reveal-delay-3" id="pickRoseBtn" aria-label="Pick a rose to reveal a quote">
+        <span class="btn-icon">🌹</span>
+        <span>Pick a Rose</span>
+      </button>
+    </div>
+
+  </section>
+
+  <!-- =============================================
+       SCENE 4 — THE LOVE LETTER
+       ============================================= -->
+  <section class="scene scene-4" id="scene-4">
+    <div class="scene-4-content">
+      <p class="section-label reveal">A Message for You</p>
+      <h2 class="section-title reveal reveal-delay-1">The Love Letter</h2>
+
+      <!-- Envelope -->
+      <div class="envelope-wrap reveal reveal-delay-2">
+        <div class="envelope" id="envelope" role="button" aria-label="Click to open the love letter" tabindex="0">
+          <div class="envelope-flap"></div>
+          <div class="envelope-body">
+            <div class="envelope-bottom-left"></div>
+            <div class="envelope-bottom-right"></div>
+            <div class="wax-seal" aria-hidden="true">♥</div>
+          </div>
+        </div>
+        <p class="reveal reveal-delay-3" style="margin-top:1rem; font-family:var(--font-serif); font-style:italic; color:var(--rose-gold);">
+          Click the envelope to open 💌
+        </p>
+      </div>
+
+      <!-- Letter Paper -->
+      <div class="letter-paper" id="letterPaper">
+        <div class="corner-rose" aria-hidden="true">🌹</div>
+        <div class="letter-lines">
+          <span class="letter-heading" id="letterHeading"></span>
+          <p class="letter-body" id="letterBody"></p>
+          <p class="letter-sign" id="letterSign">With all my love 💕</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SCENE 5 — MEMORY CAROUSEL
+       ============================================= -->
+  <section class="scene scene-5" id="scene-5">
+    <div class="scene-5-content">
+      <p class="section-label reveal">Captured Moments</p>
+      <h2 class="section-title reveal reveal-delay-1">Our Memories</h2>
+
+      <div class="carousel-stage reveal reveal-delay-2">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-card" data-index="0">
+            <img src="./Images/carousel_1.png" alt="Romantic sunset">
+            <p class="card-caption">"Every sunset is an opportunity to reset 🌅"</p>
+          </div>
+          <div class="carousel-card" data-index="1">
+            <img src="./Images/carousel_2.png" alt="Heart of roses">
+            <p class="card-caption">"You are the rose in my garden of life 🌹"</p>
+          </div>
+          <div class="carousel-card active" data-index="2">
+            <img src="./Images/carousel_3.png" alt="Holding hands">
+            <p class="card-caption">"I never want to let go of this hand 🤝"</p>
+          </div>
+          <div class="carousel-card" data-index="3">
+            <img src="./Images/carousel_4.png" alt="Floating lanterns">
+            <p class="card-caption">"Like lanterns, you light up my world ✨"</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-controls reveal reveal-delay-3">
+        <button class="carousel-btn" id="prevBtn" aria-label="Previous memory">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="carousel-dots" id="carouselDots">
+          <div class="carousel-dot" data-dot="0"></div>
+          <div class="carousel-dot" data-dot="1"></div>
+          <div class="carousel-dot active" data-dot="2"></div>
+          <div class="carousel-dot" data-dot="3"></div>
+        </div>
+        <button class="carousel-btn" id="nextBtn" aria-label="Next memory">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SCENE 6 — THE FINALE
+       ============================================= -->
+  <section class="scene scene-6" id="scene-6">
+    <div class="confetti-container" id="confettiContainer" aria-hidden="true"></div>
+
+    <div class="scene-6-content">
+
+      <!-- Big Heart -->
+      <span class="big-heart" aria-hidden="true">💕</span>
+
+      <!-- Main Title -->
+      <h2 class="finale-title">Whispers of Love</h2>
+      <p class="finale-sub">You are my greatest adventure 💕</p>
+
+      <!-- Divider -->
+      <div class="finale-divider" aria-hidden="true">
+        <span></span><span class="divider-heart">♥</span><span></span>
+      </div>
+
+      <!-- Typewriter poem -->
+      <div class="finale-poem">
+        <p class="poem-line" id="poemLine1"></p>
+        <p class="poem-line" id="poemLine2"></p>
+        <p class="poem-line" id="poemLine3"></p>
+        <p class="poem-line" id="poemLine4"></p>
+      </div>
+
+      <!-- Floating love note cards -->
+      <div class="finale-notes">
+        <div class="note-card note-1">
+          <span>🌹</span>
+          <p>Every day with you<br>is a beautiful gift</p>
+        </div>
+        <div class="note-card note-2">
+          <span>💌</span>
+          <p>You are home<br>wherever you are</p>
+        </div>
+        <div class="note-card note-3">
+          <span>✨</span>
+          <p>I choose you<br>a thousand times over</p>
+        </div>
+      </div>
+
+      <!-- Final signature -->
+      <p class="finale-signature" id="finaleSignature"></p>
+
+      <!-- Restart button -->
+      <button class="btn-restart" id="restartBtn" aria-label="Go back to beginning">
+        <i class="fa-solid fa-rotate-left"></i> Start Over
+      </button>
+    </div>
+  </section>
+
+
+  <script>
+  // ======================================================
+  //  🌹 ROMANTIC WEB ANIMATION — MAIN SCRIPT
+  // ======================================================
+
+  // --- Custom Cursor ---
+  const cursor    = document.getElementById('cursor');
+  const cursorDot = document.getElementById('cursorDot');
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top  = mouseY + 'px';
+
+    // Spawn floating hearts randomly
+    if (Math.random() < 0.12) spawnHeart(e.clientX, e.clientY);
+  });
+
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.12;
+    cursorY += (mouseY - cursorY) * 0.12;
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top  = cursorY + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // --- Floating Hearts on Cursor ---
+  const heartChars = ['♥', '💕', '💖', '💗', '💓'];
+  function spawnHeart(x, y) {
+    const h = document.createElement('div');
+    h.className = 'heart-cursor';
+    h.textContent = heartChars[Math.floor(Math.random() * heartChars.length)];
+    h.style.left = (x + Math.random() * 30 - 15) + 'px';
+    h.style.top  = (y + Math.random() * 30 - 15) + 'px';
+    h.style.fontSize = (Math.random() * 12 + 12) + 'px';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 1200);
   }
 
-  addRVLoadEvent(mwah);
+  // --- SCENE 1: Generate Petals ---
+  const petalColors = [
+    'radial-gradient(ellipse at 30% 30%, #fce4ec, #f48fb1)',
+    'radial-gradient(ellipse at 30% 30%, #f8bbd0, #f06292)',
+    'radial-gradient(ellipse at 30% 30%, #fce4ec, #ec407a)',
+    'radial-gradient(ellipse at 30% 30%, #fff9c4, #ffe082)',
+    'radial-gradient(ellipse at 30% 30%, #fce4ec, #e1a0b8)',
+  ];
+  const container = document.getElementById('petalsContainer');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left              = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (Math.random() * 6 + 5) + 's';
+    p.style.animationDelay    = (Math.random() * 10) + 's';
+    p.style.background        = petalColors[Math.floor(Math.random() * petalColors.length)];
+    p.style.width             = (Math.random() * 12 + 12) + 'px';
+    p.style.height            = (Math.random() * 14 + 14) + 'px';
+    p.style.opacity           = Math.random() * 0.4 + 0.5;
+    container.appendChild(p);
+  }
 
-  function mwah() { if (document.getElementById) {
-    var i, heart;
-    for (i = 0; i < hearts; i++) {
-      heart = createDiv("auto", "auto");
-      heart.style.visibility = "hidden";
-      heart.style.zIndex = (over_or_under == "over") ? "1001" : "0";
-      heart.style.color = colours[i % colours.length];
-      heart.style.pointerEvents = "none";
-      heart.style.opacity = 0.75;
-      heart.appendChild(document.createTextNode(String.fromCharCode(9829)));
-      document.body.appendChild(heart);
-      herz[i] = heart;
-      herzy[i] = false;
-    }
-    set_scroll();
-    set_width();
-    herzle();
-  }}
+  // --- SCENE 1: Typewriter Effect ---
+  const quotes = [
+    "Every love story is beautiful...",
+    "...but ours is my favorite. 💕"
+  ];
+  const typedEl = document.getElementById('typedText');
+  let qIdx = 0, charIdx = 0, isDeleting = false;
 
-  function herzle() {
-    var c;
-    if (Math.abs(x - ox) > 1 || Math.abs(y - oy) > 1) {
-      ox = x;
-      oy = y;
-      for (c = 0; c < hearts; c++) if (herzy[c] === false) {
-        herz[c].firstChild.nodeValue = String.fromCharCode(9829);
-        herz[c].style.left = (herzx[c] = x - minisize / 2) + "px";
-        herz[c].style.top = (herzy[c] = y - minisize) + "px";
-        herz[c].style.fontSize = minisize + "px";
-        herz[c].style.fontWeight = 'normal';
-        herz[c].style.visibility = 'visible';
-        herzs[c] = minisize;
-        break;
+  function typeLoop() {
+    const current = quotes[qIdx];
+    if (!isDeleting) {
+      typedEl.textContent = current.slice(0, charIdx + 1);
+      charIdx++;
+      if (charIdx === current.length) {
+        if (qIdx === quotes.length - 1) return; // stop after last quote
+        setTimeout(() => { isDeleting = true; typeLoop(); }, 2000);
+        return;
+      }
+    } else {
+      typedEl.textContent = current.slice(0, charIdx - 1);
+      charIdx--;
+      if (charIdx === 0) {
+        isDeleting = false;
+        qIdx = (qIdx + 1) % quotes.length;
       }
     }
-    for (c = 0; c < hearts; c++) if (herzy[c] !== false) blow_me_a_kiss(c);
-    setTimeout(herzle, 40);
+    const speed = isDeleting ? 40 : 70;
+    setTimeout(typeLoop, speed);
+  }
+  setTimeout(typeLoop, 1500);
+
+  // --- SCENE 2: Generate Stars ---
+  const starsEl = document.getElementById('starsContainer');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left             = Math.random() * 100 + '%';
+    s.style.top              = Math.random() * 100 + '%';
+    s.style.animationDuration = (Math.random() * 3 + 1.5) + 's';
+    s.style.animationDelay   = (Math.random() * 4) + 's';
+    s.style.width = s.style.height = (Math.random() * 3 + 1) + 'px';
+    // Warm pink-white star colors
+    const starColors = ['#fff0f5', '#ffd6e7', '#ffb3cc', '#ffffff', '#ffe4ed'];
+    s.style.background = starColors[Math.floor(Math.random() * starColors.length)];
+    starsEl.appendChild(s);
   }
 
-  document.onmousedown = pucker;
-  document.onmouseup = function() { clearTimeout(kiss); };
+  // Parallax stars on mouse move
+  document.getElementById('scene-2').addEventListener('mousemove', (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const cx = (e.clientX - rect.left - rect.width / 2) / rect.width;
+    const cy = (e.clientY - rect.top - rect.height / 2) / rect.height;
+    starsEl.style.transform = `translate(${cx * 20}px, ${cy * 20}px)`;
+  });
 
-  function pucker() {
-    ox = -1;
-    oy = -1;
-    kiss = setTimeout(pucker, 100);
+  // --- SCENE 2: Sparkles ---
+  const sparkleEl = document.getElementById('sparklesContainer');
+  const sparkleChars = ['✦', '✧', '✨', '⋆', '✵'];
+  for (let i = 0; i < 12; i++) {
+    const sp = document.createElement('span');
+    sp.textContent = sparkleChars[Math.floor(Math.random() * sparkleChars.length)];
+    sp.style.left             = Math.random() * 90 + 5 + '%';
+    sp.style.top              = Math.random() * 90 + 5 + '%';
+    sp.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    sp.style.animationDelay   = (Math.random() * 3) + 's';
+    sp.style.color            = ['#fff', '#fda4af', '#f0d5a0'][Math.floor(Math.random() * 3)];
+    sparkleEl.appendChild(sp);
   }
 
-  function blow_me_a_kiss(i) {
-    herzy[i] -= herzs[i] / minisize + i % 2;
-    herzx[i] += (i % 5 - 2) / 5;
-    if (herzy[i] < sdown - herzs[i] || herzx[i] < sleft - herzs[i] || herzx[i] > sleft + swide - herzs[i]) {
-      herz[i].style.visibility = "hidden";
-      herzy[i] = false;
+  // --- SCENE 3: Quote Rotation (Enhanced) ---
+  const loveQuotes = [
+    "Every moment with you is a petal in the garden of my heart.",
+    "You are my today and all of my tomorrows.",
+    "I love you more than yesterday, less than tomorrow.",
+    "You are the reason I believe in love.",
+    "In your arms I have found my home.",
+    "You make my heart smile every single day.",
+    "With you, every ordinary moment becomes extraordinary.",
+    "You are my favorite hello and my hardest goodbye.",
+  ];
+  let currentQuote = 0;
+  let quoteTyping  = false;
+  const quoteEl         = document.getElementById('loveQuote');
+  const quoteCard       = document.getElementById('quoteCard');
+  const quoteCounter    = document.getElementById('quoteCounter');
+  const roseBtn         = document.getElementById('pickRoseBtn');
+  const petalEmitter    = document.getElementById('petalEmitter');
+  const scene3          = document.getElementById('scene-3');
+  const scene3Ripple    = document.getElementById('scene3Ripple');
+  const scene3BgParts   = document.getElementById('scene3BgParticles');
+
+  // Type a string into an element character by character
+  function typeQuote(el, text, speed, onDone) {
+    el.textContent = '';
+    let i = 0;
+    const iv = setInterval(() => {
+      el.textContent += text[i];
+      i++;
+      if (i >= text.length) {
+        clearInterval(iv);
+        if (onDone) onDone();
+      }
+    }, speed);
+  }
+
+  // Spawn flying petals FROM the button (close-up burst)
+  function burstPetals(btn) {
+    const rect = btn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top  + rect.height / 2;
+    const icons = ['🌸','🌹','💕','✨','🌺','🌷','❤️','💖'];
+    const count = 20;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal-burst';
+      p.textContent = icons[Math.floor(Math.random() * icons.length)];
+      p.style.left     = cx + 'px';
+      p.style.top      = cy + 'px';
+      p.style.fontSize = (Math.random() * 14 + 14) + 'px';
+      const angle = (Math.PI * 2 / count) * i + (Math.random() - 0.5) * 0.4;
+      const dist  = Math.random() * 140 + 80;
+      p.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+      p.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+      p.style.animationDuration = (Math.random() * 0.4 + 0.8) + 's';
+      p.style.animationDelay    = (Math.random() * 0.15) + 's';
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 1300);
     }
-    else if (herzs[i] > minisize + 2 && Math.random() < .5 / hearts) break_my_heart(i);
-    else {
-      if (Math.random() < maxisize / herzy[i] && herzs[i] < maxisize) herz[i].style.fontSize = (++herzs[i]) + "px";
-      herz[i].style.top = herzy[i] + "px";
-      herz[i].style.left = herzx[i] + "px";
+  }
+
+  // Background ripple circles from center of scene
+  function triggerBgRipple() {
+    const rect  = scene3.getBoundingClientRect();
+    const cx    = rect.width  / 2;
+    const cy    = rect.height / 2;
+    const sizes = [180, 320, 500];
+    sizes.forEach((sz, idx) => {
+      const r = document.createElement('div');
+      r.className = 'ripple-circle';
+      r.style.width  = sz + 'px';
+      r.style.height = sz + 'px';
+      r.style.left   = cx + 'px';
+      r.style.top    = cy + 'px';
+      r.style.animationDelay = (idx * 0.18) + 's';
+      r.style.borderColor    = idx === 0
+        ? 'rgba(244,63,94,0.6)'
+        : idx === 1
+          ? 'rgba(251,113,133,0.4)'
+          : 'rgba(253,164,175,0.25)';
+      scene3Ripple.appendChild(r);
+      setTimeout(() => r.remove(), 1800 + idx * 200);
+    });
+  }
+
+  // Background-wide floating petals (large, drifting up)
+  function spawnBgPetals() {
+    const bgIcons = ['🌸','🌹','🌷','💮','🌺','💐'];
+    const count = 14;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'bg-petal';
+      p.textContent = bgIcons[Math.floor(Math.random() * bgIcons.length)];
+      p.style.left             = (Math.random() * 95 + 2.5) + '%';
+      p.style.bottom           = '-40px';
+      p.style.fontSize         = (Math.random() * 20 + 18) + 'px';
+      p.style.animationDuration = (Math.random() * 2.5 + 2.5) + 's';
+      p.style.animationDelay   = (Math.random() * 0.8) + 's';
+      scene3BgParts.appendChild(p);
+      setTimeout(() => p.remove(), 5500);
     }
   }
 
-  function break_my_heart(i) {
-    herz[i].firstChild.nodeValue = String.fromCharCode(9676);
-    herz[i].style.fontWeight = 'bold';
-    herzy[i] = false;
-    setTimeout(() => herz[i].style.visibility = "hidden", 400);
+  // Background gradient pulse
+  function pulseBg() {
+    scene3.classList.add('bg-pulse');
+    setTimeout(() => scene3.classList.remove('bg-pulse'), 700);
   }
 
-  document.onmousemove = mouse;
-  function mouse(e) {
-    if (e) { y = e.pageY; x = e.pageX; }
-    else { set_scroll(); y = event.y + sdown; x = event.x + sleft; }
+  // Card glow flash
+  function flashCard() {
+    quoteCard.style.transition = 'none';
+    quoteCard.style.boxShadow  = '0 0 0 4px rgba(244,63,94,0.6), 0 0 40px rgba(244,63,94,0.4)';
+    quoteCard.style.transform  = 'scale(1.04)';
+    setTimeout(() => {
+      quoteCard.style.transition = 'all 0.6s ease';
+      quoteCard.style.boxShadow  = '';
+      quoteCard.style.transform  = 'scale(1)';
+    }, 120);
   }
 
-  window.onresize = set_width;
-  function set_width() {
-    var sw_min = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    var sh_min = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    swide = sw_min;
-    shigh = sh_min;
+  // Initial quote typed on scene load
+  function initQuote() {
+    typeQuote(quoteEl, loveQuotes[0], 45);
+  }
+  // Trigger on first visibility
+  const q3Observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && quoteEl.textContent === '') initQuote();
+    });
+  }, { threshold: 0.4 });
+  q3Observer.observe(document.getElementById('scene-3'));
+
+  roseBtn.addEventListener('click', (e) => {
+    if (quoteTyping) return;
+    quoteTyping = true;
+
+    // 1. Heavy petal burst from button
+    burstPetals(roseBtn);
+
+    // 2. Background ripple wave
+    triggerBgRipple();
+
+    // 3. Background petals float up
+    spawnBgPetals();
+
+    // 4. Background gradient pulse
+    pulseBg();
+
+    // 5. Card flash
+    flashCard();
+
+    // 6. Slide old text out
+    quoteEl.style.transition  = 'opacity 0.25s ease, transform 0.25s ease';
+    quoteEl.style.opacity     = '0';
+    quoteEl.style.transform   = 'translateY(-18px)';
+
+
+    setTimeout(() => {
+      // 4. Advance to next quote
+      currentQuote = (currentQuote + 1) % loveQuotes.length;
+
+      // 5. Update counter with bounce
+      quoteCounter.style.transition = 'transform 0.2s ease';
+      quoteCounter.style.transform  = 'scale(1.4)';
+      quoteCounter.textContent      = `${currentQuote + 1} / ${loveQuotes.length}`;
+      setTimeout(() => {
+        quoteCounter.style.transform = 'scale(1)';
+      }, 200);
+
+      // 6. Reset text position for entry
+      quoteEl.style.transition = 'none';
+      quoteEl.style.transform  = 'translateY(18px)';
+      quoteEl.style.opacity    = '0';
+
+      setTimeout(() => {
+        quoteEl.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        quoteEl.style.opacity    = '1';
+        quoteEl.style.transform  = 'translateY(0)';
+
+        // 7. Typewriter for new quote
+        typeQuote(quoteEl, loveQuotes[currentQuote], 40, () => {
+          quoteTyping = false;
+        });
+      }, 60);
+    }, 280);
+
+    // 8. Spin & scale the rose icon
+    const icon = roseBtn.querySelector('.btn-icon');
+    icon.style.transition = 'transform 0.5s cubic-bezier(.36,.07,.19,.97)';
+    icon.style.transform  = 'rotate(360deg) scale(1.5)';
+    setTimeout(() => {
+      icon.style.transition = '';
+      icon.style.transform  = '';
+    }, 500);
+  });
+
+  // --- SCENE 4: Love Letter ---
+  const envelope    = document.getElementById('envelope');
+  const letterPaper = document.getElementById('letterPaper');
+  const headingEl   = document.getElementById('letterHeading');
+  const bodyEl      = document.getElementById('letterBody');
+  const signEl      = document.getElementById('letterSign');
+
+  const letterHeading = "To You, My Love...";
+  const letterBody    = "There are not enough words in any language to describe what you mean to me. You are the warmth of the morning sun, the calm of a quiet night, and the joy in between. Every day with you feels like a beautiful dream I never want to wake up from. You have changed my world in the most wonderful way, and I am so grateful that our paths crossed. Thank you for being you — for your laughter, your kindness, and your love. I carry you in my heart, always. 💕";
+
+  let letterOpened = false;
+  let letterTyping = false;
+
+  function typeText(el, text, speed, callback) {
+    let i = 0;
+    el.textContent = '';
+    const interval = setInterval(() => {
+      el.textContent += text[i];
+      i++;
+      if (i >= text.length) {
+        clearInterval(interval);
+        if (callback) callback();
+      }
+    }, speed);
   }
 
-  window.onscroll = set_scroll;
-  function set_scroll() {
-    sdown = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    sleft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+  function openLetter() {
+    if (letterOpened || letterTyping) return;
+    letterTyping = true;
+
+    envelope.classList.add('open');
+
+    setTimeout(() => {
+      letterPaper.classList.add('revealed');
+      setTimeout(() => {
+        typeText(headingEl, letterHeading, 60, () => {
+          setTimeout(() => {
+            typeText(bodyEl, letterBody, 25, () => {
+              letterPaper.classList.add('sign-visible');
+              letterOpened = true;
+              letterTyping = false;
+            });
+          }, 400);
+        });
+      }, 600);
+    }, 1000);
   }
 
-  function createDiv(height, width) {
-    var div = document.createElement("div");
-    div.style.position = "absolute";
-    div.style.height = height;
-    div.style.width = width;
-    div.style.overflow = "hidden";
-    div.style.backgroundColor = "transparent";
-    return div;
+  envelope.addEventListener('click', openLetter);
+  envelope.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') openLetter(); });
+
+  // --- SCENE 5: Carousel ---
+  const cards     = document.querySelectorAll('.carousel-card');
+  const dots      = document.querySelectorAll('.carousel-dot');
+  const totalCards = cards.length;
+  let activeIndex = 2; // center card
+
+  const cardPositions = [
+    { tx: -340, rot: -8, scale: 0.85, z: 4 },
+    { tx: -170, rot: -4, scale: 0.92, z: 6 },
+    { tx:    0, rot:  0, scale: 1.05, z: 10 },
+    { tx:  170, rot:  4, scale: 0.92, z: 6 },
+  ];
+
+  function updateCarousel(center) {
+    activeIndex = ((center % totalCards) + totalCards) % totalCards;
+    cards.forEach((card, i) => {
+      card.classList.remove('active');
+      const offset = ((i - activeIndex) + totalCards) % totalCards;
+      // Map offset to position index
+      let posIdx;
+      if      (offset === 0)              posIdx = 2; // center
+      else if (offset === 1)              posIdx = 3; // right 1
+      else if (offset === totalCards - 1) posIdx = 1; // left 1
+      else if (offset === 2)              posIdx = 3; // far right (hidden behind)
+      else                                posIdx = 0; // far left
+
+      const pos = cardPositions[posIdx];
+      card.style.transform = `translateX(${pos.tx}px) rotate(${pos.rot}deg) scale(${pos.scale})`;
+      card.style.zIndex    = pos.z;
+      card.style.opacity   = (offset <= 1 || offset >= totalCards - 1) ? '1' : '0.5';
+    });
+    cards[activeIndex].classList.add('active');
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === activeIndex);
+    });
   }
-  </script>
-</head>
 
-<body>
-  <!-- 👇 Your entire original content (untouched) -->
-  <!-- START -->
-  <div id="wrapper">
-    <div class="flag__birthday">
-      <img src="./images/1.png" alt="" width="350" class="flag__left">
-      <img src="./images/1.png" alt="" width="350" class="flag__right">
-    </div>
+  document.getElementById('prevBtn').addEventListener('click', () => updateCarousel(activeIndex - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => updateCarousel(activeIndex + 1));
 
-    <div class="content">
-      <div class="left">
-        <div class="title">
-          <h1 class="happy">
-            <span style="--t: 4s;">H</span>
-            <span style="--t: 4.2s;">a</span>
-            <span style="--t: 4.4s;">p</span>
-            <span style="--t: 4.6s;">p</span>
-            <span style="--t: 4.8s;">y</span>
-          </h1>
-          <h1 class="birthday">
-            <span style="--t: 5s;">B</span>
-            <span style="--t: 5.2s;">i</span>
-            <span style="--t: 5.4s;">r</span>
-            <span style="--t: 5.6s;">t</span>
-            <span style="--t: 5.8s;">h</span>
-            <span style="--t: 6s;">d</span>
-            <span style="--t: 6.2s;">a</span>
-            <span style="--t: 6.4s;">y</span>
-          </h1>
-          <div class="hat">
-            <img src="./images/hat.png" alt="" width="130">
-          </div>
-        </div>
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => updateCarousel(+dot.dataset.dot));
+  });
 
-        <div class="date__of__birth">
-          <span></span>
-        </div>
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const idx = +card.dataset.index;
+      if (idx !== activeIndex) updateCarousel(idx);
+    });
+  });
 
-        <div class="btn">
-          <button id="btn__letter">
-            Click here 
-            <i class="fa-regular fa-envelope"></i>
-          </button>
-        </div>
-      </div>
+  // Touch/swipe support
+  let touchStartX = 0;
+  const carouselTrack = document.getElementById('carouselTrack');
+  carouselTrack.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  carouselTrack.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) updateCarousel(diff > 0 ? activeIndex + 1 : activeIndex - 1);
+  });
 
-      <div class="right">
-        <div class="box__account">
-          <div class="image">
-            <img src="./images/r5.jpg" alt="">
-          </div>
-          <div class="name">
-            <i class="fa-solid fa-heart"></i>
-            <span>Hayati</span>
-            <i class="fa-solid fa-heart"></i>
-          </div>
-          <div class="balloon_one">
-            <img width="100px" src="./images/balloon1.png" alt="">
-          </div>
-          <div class="balloon_two">
-            <img width="100px" src="./images/balloon2.png" alt="">
-          </div>
-        </div>
+  // --- SCENE 6: Confetti ---
+  const confettiColors = ['#fb7185','#fda4af','#f43f5e','#d4a574','#fce4ec','#f0d5a0','#e879a2','#fbbf24'];
+  const confettiEl = document.getElementById('confettiContainer');
 
-        <div class="cricle">
-          <div class="text__cricle">
-            <span style="--i: 1;">h</span>
-            <span style="--i: 2;">a</span>
-            <span style="--i: 3;">p</span>
-            <span style="--i: 4;">p</span>
-            <span style="--i: 5;">y</span>
-            <span style="--i: 6;">-</span>
-            <span style="--i: 7;">b</span>
-            <span style="--i: 8;">i</span>
-            <span style="--i: 9;">r</span>
-            <span style="--i: 10;">t</span>
-            <span style="--i: 11;">h</span>
-            <span style="--i: 12;">d</span>
-            <span style="--i: 13;">a</span>
-            <span style="--i: 14;">y</span>
-            <span style="--i: 15;">-</span>
-          </div>
-          <i class="fa-solid fa-heart"></i>
-        </div>
-      </div>
-    </div>
+  // --- SCENE 6: Poem Typewriter ---
+  const poemLines = [
+    "In you, I found a love that feels like home,",
+    "A gentle warmth that I have always known.",
+    "Through every season, through the years ahead,",
+    "I'll love you more with every word unsaid.",
+  ];
+  const signatureText = "— Yours, forever & always 💕";
+  let poemStarted = false;
 
-    <div class="decorate_star star1" style="--t: 15s;"></div>
-    <div class="decorate_star star2" style="--t: 15.2s;"></div>
-    <div class="decorate_star star3" style="--t: 15.4s;"></div>
-    <div class="decorate_star star4" style="--t: 15.6s;"></div>
-    <div class="decorate_star star5" style="--t: 15.8s;"></div>
-
-    <div class="decorate_flower--one" style="--t: 15s;">
-      <img width="20" src="./images/decorate_flower.png" alt="">
-    </div>
-    <div class="decorate_flower--two" style="--t: 15.3s;">
-      <img width="20" src="./images/decorate_flower.png" alt="">
-    </div>
-    <div class="decorate_flower--three" style="--t: 15.6s;">
-      <img width="20" src="./images/decorate_flower.png" alt="">
-    </div>
-
-    <div class="decorate_bottom">
-      <img src="./images/decorate.png" alt="" width="100">
-    </div>
-    <div class="smiley__icon">
-      <img src="./images/smiley_icon.png" alt="" width="100">
-    </div>
-
-    <!-- Letter Box -->
-    <div class="box__letter">
-      <div class="letter__border">
-        <div class="letter">
-          <div class="title__letter"></div>
-          <div class="content__letter">
-            <div class="left">
-              <img id="heart__letter" src="https://media0.giphy.com/media/c76IJLufpNwSULPk77/giphy.gif" alt="">
-              <img class="heart heart_1" style="--t: 0.2s" width="20" src="./images/heart.png" alt="">
-              <img class="heart heart_2" style="--t: 0.4s" width="20" src="./images/heart.png" alt="">
-              <img class="heart heart_3" style="--t: 0.6s" width="20" src="./images/heart.png" alt="">
-              <img class="heart heart_4" style="--t: 0.8s" width="20" src="./images/heart.png" alt="">
-            </div>
-            <div class="right">
-              <div class="love__img">
-                <img src="https://media4.giphy.com/media/W4jyjmIpnw6e38B6Qc/giphy.gif" alt="" width="220">
-              </div>
-              <div class="text__letter">
-                <p></p>
-              </div>
-              <img id="mewmew" width="80" src="./images/mewmew.gif" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="close">
-          <i class="fa-solid fa-xmark"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Original script unchanged -->
-  <script>
-    let datetxt = "23 May 2005";
-    let datatxtletter = "---------------------------------------------------------------You are a very special girl. Today, I wish you all the best, lots of health, and lots of joy.  I always hope we will celebrate many more birthdays like this together. Happy birthday to you.💕";
-    let titleLetter = "To you";
-    let charArrDate = datetxt.split('');
-    let charArrDateLetter = datatxtletter.split('');
-    let charArrTitle = titleLetter.split('');
-    let currentIndex = 0;
-    let currentIndexLetter = 0;
-    let currentIndexTitle = 0;
-    let date__of__birth = document.querySelector(".date__of__birth span");
-    let text__letter = document.querySelector(".text__letter p");
-
-    setTimeout(function(){
-      timeDatetxt = setInterval(function(){
-        if(currentIndex < charArrDate.length){
-          date__of__birth.textContent += charArrDate[currentIndex];
-          currentIndex++;
-        } else {
-          let i = document.createElement("i");
-          i.className = "fa-solid fa-star";
-          document.querySelector(".date__of__birth").prepend(i);
-          document.querySelector(".date__of__birth").appendChild(i.cloneNode(true));
-          clearInterval(timeDatetxt);
+  function typeLineSequential(lines, els, speed, lineDelay, onAllDone) {
+    let li = 0;
+    function nextLine() {
+      if (li >= lines.length) { if (onAllDone) onAllDone(); return; }
+      let ci = 0;
+      const el = els[li];
+      el.textContent = '';
+      const iv = setInterval(() => {
+        el.textContent += lines[li][ci];
+        ci++;
+        if (ci >= lines[li].length) {
+          clearInterval(iv);
+          li++;
+          setTimeout(nextLine, lineDelay);
         }
-      },100)
-    },12000);
+      }, speed);
+    }
+    nextLine();
+  }
 
-    var intervalContent;
-    var intervalTitle;
-    $("#btn__letter").on("click", function(){
-      $(".box__letter").slideDown();
-      setTimeout(function(){
-        $(".letter__border").slideDown();
-      },1000);
-      setTimeout(function(){
-        intervalTitle = setInterval(function(){
-          if(currentIndexTitle < charArrTitle.length){
-            document.querySelector(".title__letter").textContent += charArrTitle[currentIndexTitle];
-            let i = document.createElement("i");
-            i.className = "fa-solid fa-heart";
-            document.querySelector(".title__letter").appendChild(i);
-            currentIndexTitle++;
-          } else {
-            clearInterval(intervalTitle);
-          }
-        },100);
-      },2000);
-      setTimeout(function(){
-        document.querySelector("#heart__letter").classList.add("animationOp");
-        document.querySelector(".love__img").classList.add("animationOp");
-        document.querySelector("#mewmew").classList.add("animationOp");
-      },2800);
-      setTimeout(function(){
-        document.querySelectorAll(".heart").forEach((item)=>{
-          item.classList.add("animation");
-        })
-      },3500);
-      setTimeout(function(){
-        intervalContent = setInterval(function(){
-          if(currentIndexLetter < charArrDateLetter.length){
-            text__letter.textContent += charArrDateLetter[currentIndexLetter];
-            currentIndexLetter++;
-          } else {
-            clearInterval(intervalContent);
-          }
-        },50);
-      },6000);
-    });
+  function startFinalePoem() {
+    if (poemStarted) return;
+    poemStarted = true;
 
-    $(".close").on("click", function(){
-      clearInterval(intervalContent);
-      document.querySelector(".title__letter").textContent = "";
-      text__letter.textContent = "";
-      currentIndexLetter = 0;
-      currentIndexTitle = 0;
-      document.querySelector("#heart__letter").classList.remove("animationOp");
-      document.querySelector(".love__img").classList.remove("animationOp");
-      document.querySelector("#mewmew").classList.remove("animationOp");
-      document.querySelectorAll(".heart").forEach((item)=>{
-        item.classList.remove("animation");
+    const lineEls = [
+      document.getElementById('poemLine1'),
+      document.getElementById('poemLine2'),
+      document.getElementById('poemLine3'),
+      document.getElementById('poemLine4'),
+    ];
+    const sigEl = document.getElementById('finaleSignature');
+
+    // Start typing after poem section fades in (CSS animation delay = 2s)
+    setTimeout(() => {
+      typeLineSequential(poemLines, lineEls, 38, 300, () => {
+        // After poem done, type signature
+        setTimeout(() => {
+          let si = 0;
+          sigEl.textContent = '';
+          const iv = setInterval(() => {
+            sigEl.textContent += signatureText[si];
+            si++;
+            if (si >= signatureText.length) clearInterval(iv);
+          }, 55);
+        }, 600);
       });
-      $(".box__letter").slideUp();
-      $(".letter__border").slideUp();
+    }, 2200);
+  }
+
+  // --- SCENE 6: Confetti ---
+  function createConfetti() {
+
+    confettiEl.innerHTML = '';
+    for (let i = 0; i < 60; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.left             = Math.random() * 100 + 'vw';
+      c.style.top              = -20 + 'px';
+      c.style.background       = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      c.style.width            = (Math.random() * 8 + 6)  + 'px';
+      c.style.height           = (Math.random() * 8 + 6)  + 'px';
+      c.style.borderRadius     = Math.random() > 0.5 ? '50%' : '2px';
+      c.style.animationDuration = (Math.random() * 4 + 4) + 's';
+      c.style.animationDelay   = (Math.random() * 5) + 's';
+      c.style.setProperty('--cx', (Math.random() * 100 - 50) + 'px');
+      confettiEl.appendChild(c);
+    }
+  }
+
+  // --- Restart ---
+  document.getElementById('restartBtn').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // --- Scroll Navigation Dots ---
+  const scenes     = document.querySelectorAll('.scene');
+  const navDots    = document.querySelectorAll('.scroll-dot');
+  const sceneIds   = ['scene-1','scene-2','scene-3','scene-4','scene-5','scene-6'];
+
+  navDots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const sceneIdx = +dot.dataset.scene;
+      document.getElementById(sceneIds[sceneIdx]).scrollIntoView({ behavior: 'smooth' });
     });
+  });
+
+  // IntersectionObserver for scene tracking & reveal animations
+  const sceneObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id    = entry.target.id;
+        const idx   = sceneIds.indexOf(id);
+        navDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+
+        // Scene-specific triggers
+        if (id === 'scene-6') {
+          createConfetti();
+          startFinalePoem();
+        }
+
+        if (id === 'scene-2') {
+          // Trigger star reset on re-entry
+          document.querySelector('.moon').style.animation = 'none';
+          setTimeout(() => document.querySelector('.moon').style.animation = '', 10);
+        }
+      }
+    });
+  }, { threshold: 0.5 });
+
+  scenes.forEach(s => sceneObserver.observe(s));
+
+  // Reveal observer
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Initial call
+  updateCarousel(2);
   </script>
+
 </body>
 </html>

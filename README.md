@@ -1,64 +1,65 @@
-# Birthday Celebration
+# Whispers of Love 💕
 
-A warm, interactive birthday greeting page created for a special celebration. The experience combines animated typography, floating hearts, balloons, a birthday date reveal, and a letter-style surprise message in one lightweight web page.
+> *“Every love story is beautiful, but ours is my favorite.”*
 
-## Features
+**Whispers of Love** is an interactive, cinematic digital romantic experience crafted for special gestures, anniversaries, or romantic celebrations. Built with fluid animations, soft pastel gradients, dynamic rose petal physics, and custom interactive scenes, it guides the viewer through a 6-chapter journey of love and shared memories.
 
-- Animated `Happy Birthday` introduction
-- Personalized recipient name: **Hayati**
-- Birthday date reveal: **23 May 2005**
-- Interactive birthday letter with animated message
-- Floating heart cursor effect
-- Decorative balloons, flags, stars, and flowers
-- Responsive layout for desktop and mobile screens
-- No build step required
+---
 
-## Getting Started
+## ✨ Experience Breakdown
 
-1. Download or clone this repository.
-2. Keep `index.html`, `style.css`, and the `Images` folder in the same directory.
-3. Open `index.html` in a modern browser.
+- **🌸 Scene 1 — The Opening**: Soft falling rose petals, ambient glowing typography, and a smooth typewriter introduction.
+- **🌌 Scene 2 — Starry Night**: Soft twilight gradients with ambient glowing stars and poetic romantic thoughts.
+- **🌹 Scene 3 — Garden of Love**: An interactive rose-picking quote generator with background ripple waves, petal bursts, and dynamic counter feedback.
+- **💌 Scene 4 — Love Letter**: A glassmorphic interactive envelope with an animated wax seal reveal opening into a heartfelt message.
+- **📸 Scene 5 — Memory Carousel**: A polaroid memory carousel designed for displaying cherished captured moments.
+- **🎆 Scene 6 — The Finale**: Celebratory confetti, an automated typewriter love poem, handwritten signature, and floating love note cards.
+- **✨ Complete Theme Polish**: Matching rose-pink gradient custom scrollbar, custom glowing cursor, and smooth scroll snap navigation.
 
-For the smoothest local development experience, open the folder in VS Code and use a local static server such as Live Server.
+---
 
-## Personalization
+## 🛠️ Tech Stack
 
-Open `index.html` and update the values near the bottom of the file:
+- **Core**: HTML5, Vanilla JavaScript (Zero framework overhead for maximum performance)
+- **Styling**: CSS3 with Glassmorphism, CSS Variables, Flexbox/Grid, and Keyframe Animations
+- **Typography**: Google Fonts (*Dancing Script*, *Cormorant Garamond*, *Nunito*)
+- **Icons**: Font Awesome 6
 
-- `datetxt` controls the birthday date.
-- `datatxtletter` controls the letter message.
-- `titleLetter` controls the letter heading.
-- The visible recipient name is inside the `.name` element.
+---
 
-Visual styling, responsive behavior, colors, spacing, and animations can be adjusted in `style.css`.
+## 🚀 How to Run
 
-## Project Structure
+1. Open `index.html` in any modern web browser (or launch via **Live Server** in VS Code).
+2. Scroll through the experience or click the side navigation dots to navigate between scenes.
+
+---
+
+## 📁 Project Structure
 
 ```text
-birthday-celebration/
-├── index.html
-├── style.css
-└── Images/
-    ├── balloons and decorations
-    ├── birthday illustrations
-    └── supporting images and GIFs
+Whispers-of-Love/
+├── index.html       # Single-page application structure & interactive logic
+├── style.css        # Full romantic design system, glassmorphism & animations
+├── Images/          # Memory carousel polaroid photos
+│   ├── carousel_1.png
+│   ├── carousel_2.png
+│   ├── carousel_3.png
+│   └── carousel_4.png
+└── README.md        # Documentation
 ```
 
-## Built With
+---
 
-- HTML5
-- CSS3 animations and responsive media queries
-- Vanilla JavaScript
-- jQuery for the letter reveal interaction
-- Font Awesome icons
-- Google Fonts
+## 🎨 Customization Guide
 
-## Author
+You can easily adapt this project for your special someone:
+- **Quotes (Scene 3)**: Modify the `quotes` array in `index.html`.
+- **Love Letter (Scene 4)**: Edit the `letterBody` string variable in `index.html`.
+- **Photos (Scene 5)**: Replace `carousel_1.png` through `carousel_4.png` in the `Images/` folder with your own photos.
+- **Finale Poem (Scene 6)**: Update `poemLines` and `signatureText` in `index.html`.
 
-**Hayati**
+---
 
-Repository: [github.com/saklincodes/birthday-celebration](https://github.com/saklincodes/birthday-celebration)
+## 💖 License
 
-## Credits and Third-Party Resources
-
-This project references third-party libraries, fonts, and hosted animation assets. Please review and follow the applicable licenses and usage terms before redistributing or publishing modified versions.
+Created with love. Feel free to fork, customize, and share it for your personal romantic gifts!
