@@ -293,36 +293,37 @@
     container.appendChild(p);
   }
 
-  // --- SCENE 1: Typewriter Effect (Flicker-Free & Smooth Reveal) ---
+  // --- SCENE 1: Typewriter Effect ---
+  const quotes = [
+    "Every love story is beautiful...",
+    "...but ours is my favorite. 💕"
+  ];
   const typedEl = document.getElementById('typedText');
+  let qIdx = 0, charIdx = 0, isDeleting = false;
 
-  function startScene1Typewriter() {
-    const q1 = "Every love story is beautiful...";
-    const q2 = "...but ours is my favorite. 💕";
-    let i = 0;
-    typedEl.textContent = '';
-    
-    // Type Quote 1 smoothly
-    const iv1 = setInterval(() => {
-      typedEl.textContent += q1[i];
-      i++;
-      if (i >= q1.length) {
-        clearInterval(iv1);
-        // Pause for 1.6s, then smoothly fade out Q1 and reveal Q2
-        setTimeout(() => {
-          typedEl.style.transition = 'opacity 0.4s ease';
-          typedEl.style.opacity = '0';
-          setTimeout(() => {
-            typedEl.textContent = q2;
-            typedEl.style.opacity = '1';
-          }, 420);
-        }, 1600);
+  function typeLoop() {
+    const current = quotes[qIdx];
+    if (!isDeleting) {
+      typedEl.textContent = current.slice(0, charIdx + 1);
+      charIdx++;
+      if (charIdx === current.length) {
+        if (qIdx === quotes.length - 1) return; // stop after last quote
+        setTimeout(() => { isDeleting = true; typeLoop(); }, 2000);
+        return;
       }
-    }, 55);
+    } else {
+      typedEl.textContent = current.slice(0, charIdx - 1);
+      charIdx--;
+      if (charIdx === 0) {
+        isDeleting = false;
+        qIdx = (qIdx + 1) % quotes.length;
+      }
+    }
+    const speed = isDeleting ? 40 : 70;
+    setTimeout(typeLoop, speed);
   }
-
-  // Start after CSS fadeInUp animation completes (2.2s delay)
-  setTimeout(startScene1Typewriter, 2200);
+  // Start smoothly after CSS fadeInUp animation completes
+  setTimeout(typeLoop, 2200);
 
   // --- SCENE 2: Generate Stars ---
   const starsEl = document.getElementById('starsContainer');
