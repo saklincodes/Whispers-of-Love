@@ -245,8 +245,8 @@
     cursorDot.style.left = mouseX + 'px';
     cursorDot.style.top  = mouseY + 'px';
 
-    // Spawn floating hearts randomly
-    if (Math.random() < 0.12) spawnHeart(e.clientX, e.clientY);
+    // Spawn floating hearts randomly with throttling for smooth 60fps performance
+    if (Math.random() < 0.04) spawnHeart(e.clientX, e.clientY);
   });
 
   function animateCursor() {

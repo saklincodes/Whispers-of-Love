@@ -89,7 +89,8 @@ body {
   z-index: 9999;
   transform: translate(-50%, -50%);
   transition: width 0.2s, height 0.2s, background 0.2s;
-  mix-blend-mode: multiply;
+  box-shadow: 0 0 12px rgba(244, 63, 94, 0.35);
+  will-change: transform;
 }
 .cursor-dot {
   width: 6px;
@@ -101,6 +102,7 @@ body {
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
+  will-change: transform;
 }
 
 /* === FLOATING HEARTS CURSOR === */
@@ -112,6 +114,8 @@ body {
   animation: floatHeart 1.2s ease-out forwards;
   color: var(--rose-400);
   text-shadow: var(--glow-pink);
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
 }
 @keyframes floatHeart {
   0%   { opacity: 1; transform: translateY(0) scale(1); }
@@ -181,6 +185,8 @@ body {
   opacity: 0.8;
   animation: fallingPetal linear infinite;
   filter: drop-shadow(0 2px 4px rgba(244, 63, 94, 0.3));
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 @keyframes fallingPetal {
   0%   { transform: translateY(-60px) rotate(0deg) translateX(0); opacity: 0.9; }
